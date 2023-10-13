@@ -29,7 +29,6 @@ const buttons= [
 var sum = 0;
 
 // DOM ELEMENTS 
-
 var buttonsContainer = document.querySelector('.operational_buttons_container');
 const taskForm = document.querySelector('#task-form');
 const actual_answer = document.querySelector('.actual_answer')
@@ -45,7 +44,6 @@ buttons.forEach( (btn) =>{
     buttonElement.innerHTML = `${btn.value}`;
 
     buttonElement.classList.add(`operation_button`);
-    buttonElement.classList.add(`${btn.value}`);
     buttonElement.style.backgroundColor = `${btn.color}`;
     buttonsContainer.appendChild(buttonElement);
 
@@ -53,18 +51,22 @@ buttons.forEach( (btn) =>{
 
 // VALIDATION FUNCTION 
 const validate = (btn)=>{
-    var first_number = first_number_input.value;
-    var second_number = second_number_input.value;
+    var first_number = first_number_input.value.trim();
+    var second_number = second_number_input.value.trim();
 
 
-    if((first_number.trim()).length == 0 || (second_number.trim()).length == 0 )
+    if(first_number.length == 0 || second_number.trim().length == 0 )
     {
-        alert("Input All numbers")
+        alert("Input All numbers Correctly")
+
+        if(!isNaN(first_number) && !isNaN(first_number)){
+            alert("Values should be numbers")
+        }
     }
     else{
 
-    first_number =  Number(first_number);
-    second_number= Number(second_number);
+    first_number =  float(first_number);
+    second_number= float(second_number);
     
    if (btn.innerText == "Additional") {
     
@@ -103,7 +105,6 @@ let btnss = buttonsContainer.childNodes;
 
 // LOOP THROUGH EACH OPERATIONAL BUTTON FOR FUNCTIONALITY 
 btnss.forEach((btn)=>{
-
     btn.addEventListener("click", () => validate(btn));
 });
 
